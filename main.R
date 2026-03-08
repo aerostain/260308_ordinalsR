@@ -28,4 +28,17 @@ m = apply_labels(mtcars,
 )
 
 m %>% str
-read.sa
+
+with(m,table(vs,am)) %>% chisq.test()
+
+m %>% cross_cases(cyl,list(total(),am,vs))
+
+m %>% tab_cells(cyl)%>% 
+  tab_cols(list(total(),am,vs)) %>% 
+  tab_stat_cpct(total_label = "Total") %>% 
+  tab_pivot()
+
+m %>% tab_cells(am) %>% tab_stat_cases() %>% tab_pivot
+
+m$am %>% cro()
+m %>% cross_cases(am)
